@@ -1,13 +1,20 @@
 
 @import "tailwindcss";
 body{
-    background: url(/colors-backgrounds-cover.webp);
+    /* background: url(/colors-backgrounds-cover.webp);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+      <div className=' flex  h-full p-6 w-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100'> 
+
+    background-repeat: no-repeat; */
+    background-color: #DCDCDC;
+     /* background-image: url(/frontend/public/sideimage.webp); */
    
     
-}
+ }
+
+
+
 ::-webkit-scrollbar {
     width: 6px;
   }

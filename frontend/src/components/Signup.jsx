@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -11,23 +11,30 @@ const Signup = () => {
     confirmPassword: "",
     gender: "",
   });
-  const navigator = useNavigate()
+  const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+  const navigator = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // 
+    //
     try {
-      const res = await axios.post('http://localhost:8080/api/v1/user/register', user, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      });
-      
-    
+      const res = await axios.post(
+        "http://localhost:8080/api/v1/user/register",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
       // Check the response structure
       if (res.data.success) {
-        navigator("/login")
+        navigator("/");
       }
       //   // window.location.href = '/login';
       //   // window.location.href ="whatsapp://"
@@ -36,10 +43,9 @@ const Signup = () => {
       // }
     } catch (error) {
       // Log the full error to diagnose the issue
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     }
-    
-    
+
     // setUser({
     //   username: "",
     //   fullname: "",
@@ -50,13 +56,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-w-96 mx-auto">
-      <div className="h-full p-6 w-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
-        <h1 className="text-3xl font-bold text-center text-gray-300">Sign Up</h1>
+    <div className="w-[50%] mx-auto bg-white text-black p-8 rounded-2xl  shadow-lg overflow-hidden ">
+      <div className="h-full p-6 w-full ">
+        <h1 className="text-3xl font-semibold text-center text-black/80">
+          Sign Up
+        </h1>
         <form onSubmit={onSubmit}>
           <div>
-            <label htmlFor="fullname" className="label p-2">
-              <span className="text-base">Full Name</span>
+            <label
+              htmlFor="fullname"
+              className="lock text-base mb-1 text-black"
+            >
+              Full Name
             </label>
             <input
               id="fullName"
@@ -64,13 +75,17 @@ const Signup = () => {
               type="text"
               value={user.fullName}
               onChange={(e) => setUser({ ...user, fullName: e.target.value })}
-              className="w-full h-10 input input-bordered"
+              className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2  text-black "
               placeholder="Full Name"
+              required
             />
           </div>
 
           <div>
-            <label htmlFor="username" className="label p-2">
+            <label
+              htmlFor="username"
+              className="lock text-base mb-1 text-black label p-"
+            >
               User Name
             </label>
             <input
@@ -79,41 +94,59 @@ const Signup = () => {
               type="text"
               value={user.username}
               onChange={(e) => setUser({ ...user, username: e.target.value })}
-              className="w-full h-10 input input-bordered"
+              className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2  text-black"
               placeholder="User Name"
+              required
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="label p-2">
-              <span className="text-base">Password</span>
+          <div className="mb-4 relative">
+            <label htmlFor="password" className="text-base mb-1 text-black">
+              Password
             </label>
             <input
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
-              className="w-full h-10 input input-bordered"
+              className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-black"
               placeholder="Password"
+              required
             />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-12 transform -translate-y-1/2 cursor-pointer text-gray-600 text-2xl"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="label p-2">
-              <span className="text-base">Confirm Password</span>
+          <div className="mb-4 relative">
+            <label
+              htmlFor="confirmPassword"
+              className="text-base mb-1 text-black"
+            >
+              Confirm Password
             </label>
             <input
               id="confirmPassword"
               name="confirmPassword"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               value={user.confirmPassword}
               onChange={(e) =>
                 setUser({ ...user, confirmPassword: e.target.value })
               }
-              className="w-full h-10 input input-bordered"
+              className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-black"
               placeholder="Confirm Password"
+              required
             />
+            <span
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-12  transform -translate-y-1/2 cursor-pointer text-gray-600 text-2xl"
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
 
           <div className="flex justify-center my-4">
@@ -125,6 +158,7 @@ const Signup = () => {
               checked={user.gender === "male"}
               onChange={() => setUser({ ...user, gender: "male" })}
               className="radio mx-2"
+              required
             />
             <p>Female</p>
             <input
@@ -137,13 +171,16 @@ const Signup = () => {
             />
           </div>
 
-          <p className="flex justify-center">
-            Already have an account?{" "}
-            <Link to="/LogIn" className="text-blue-400">
+          <p className="flex justify-center mb-4 ">
+            Already have an account?{"  "}
+            <Link to="/" className="text-purple-500 hover:underline">
               Login
             </Link>
           </p>
-          <button type="submit" className="btn btn-block btn-sm mt-2 border-slate-700">
+          <button
+            type="submit"
+            className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition"
+          >
             Sign Up
           </button>
         </form>
