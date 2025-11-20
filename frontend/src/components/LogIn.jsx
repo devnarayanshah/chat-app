@@ -68,9 +68,9 @@ const LogIn = () => {
   };
 
   return (
-    <div className="w-[50%] mx-auto  flex bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="lg:w-[50%] md:w-[90%] md:mx-auto  md:flex md:bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Left Panel */}
-      <div className="w-1/2 p-10 flex flex-col justify-center">
+      <div className="md:w-1/2 w-full p-10 md:flex   flex-col justify-center">
         <h1 className="text-3xl text-black font-bold mb-2">
           Hello, Welcome Back
         </h1>
@@ -134,7 +134,7 @@ const LogIn = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="w-1/2 bg-gradient-to-tr from-purple-400 to-purple-600 flex items-center justify-center  m-4 rounded-2xl">
+      <div className="md:w-1/2 bg-gradient-to-tr from-purple-400 to-purple-600 flex items-center justify-center  m-4 rounded-2xl">
         <img
           src={FingerprintImage}
           alt="Login Illustration"
