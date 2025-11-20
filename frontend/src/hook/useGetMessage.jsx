@@ -11,7 +11,7 @@ const useGetMessage = () => {
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const res = await axios.get(`${apiurl}apiUrl/api/v1/user/`, {
+        const res = await axios.get(`${apiurl}apiUrl/api/v1/user/${selectedUser}`, {
           withCredentials: true,
         });
 
