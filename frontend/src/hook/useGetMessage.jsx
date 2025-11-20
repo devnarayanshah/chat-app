@@ -1,27 +1,30 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setMessages } from "../redux/messageSlice";
 
-const useGetMessage = () => {
+const useGetMessages = () => {
+  const dispatch = useDispatch();
+  const { selectedUser } = useSelector(state => state.user);
   const apiurl = import.meta.env.VITE_API_URL;
 
-  const { selectedUser } = useSelector((store) => store.user);
-  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchMessage = async () => {
+    if (!selectedUser) return;
+
+    const fetchMessages = async () => {
       try {
-        const res = await axios.get(`${apiurl}apiUrl/api/v1/user/${selectedUser._id}`, {
+        const res = await axios.get(`${apiurl}/api/v1/message/${selectedUser._id}`, {
           withCredentials: true,
         });
 
-        dispatch(setMessages(res.data));
-      } catch (error) {
-        console.log(error);
+        dispatch(setMessages(res.data.messages));
+      } catch (err) {
+        console.error("Fetch messages error:", err);
       }
     };
-    fetchMessage();
-  }, [selectedUser, dispatch,apiurl]);
+
+    fetchMessages();
+  }, [selectedUser, apiurl, dispatch]);
 };
 
-export default useGetMessage;
+export default useGetMessages;

@@ -53,8 +53,8 @@ export const sendMessage = async (req, res) => {
 // ==================== Get Messages ====================
 export const getMessage = async (req, res) => {
   try {
-    const receiverId = req.params.id;
-    const senderId = req.id;
+    const receiverId = req.params.id;  // selected user ID
+    const senderId = req.id;           // logged-in user ID from middleware
 
     const conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -69,3 +69,4 @@ export const getMessage = async (req, res) => {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
