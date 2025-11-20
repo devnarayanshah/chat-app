@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     if (authUser) {
-      const socketIo = io("https://chat-app-3eav.onrender.com/", {
+      const socketIo = io("https://chat-app-3eav.onrender.com", {
         query: {
           userId: authUser._id,
         },
