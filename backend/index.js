@@ -13,10 +13,12 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-const corsOptions = {
-  origin: "http://localhost:5173", // Allow only requests from this origin
-  credentials: true, // Allow credentials (cookies, HTTP authentication)
-};
+const cors = require("cors");
+app.use(cors({
+  origin: "*",
+  methods: ["GET","POST"],
+}));
+
 
 app.use(cors(corsOptions));
 app.use("/api/v1/user", userRouts);
