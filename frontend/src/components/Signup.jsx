@@ -4,6 +4,8 @@ import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
+  const apiurl = import.meta.env.VITE_API_URL;
+
   const [user, setUser] = useState({
     username: "",
     fullName: "",
@@ -12,8 +14,7 @@ const Signup = () => {
     gender: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigator = useNavigate();
 
@@ -21,16 +22,12 @@ const Signup = () => {
     e.preventDefault();
     //
     try {
-      const res = await axios.post(
-        "https://chat-app-3eav.onrender.com/api/v1/user/register",
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${apiurl}/api/v1/user/register`, user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
 
       // Check the response structure
       if (res.data.success) {

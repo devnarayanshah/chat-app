@@ -13,11 +13,13 @@ import {
 } from "../redux/userSlice";
 
 const Sidebar = () => {
+    const apiurl = import.meta.env.VITE_API_URL;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`https://chat-app-3eav.onrender.com/api/v1/user/logout`);
+      const res = await axios.get(`${apiurl}/api/v1/user/logout`);
       toast.success(res.data.message);
       dispatch(setAuthUser(null));
       dispatch(setOtherUSers(null));

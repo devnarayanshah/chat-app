@@ -5,13 +5,14 @@ import { setOtherUSers } from "../redux/userSlice";
 
 const useGetOtherUser = () => {
   const dispatch = useDispatch();
+  const apiurl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchOtherUser = async () => {
       try {
-        const res = await axios.get(
-          "https://chat-app-3eav.onrender.com/api/v1/user/",
-          { withCredentials: true }
-        );
+        const res = await axios.get(`${apiurl}/api/v1/user/`, {
+          withCredentials: true,
+        });
 
         dispatch(setOtherUSers(res.data));
         console.log(res.data.message);
@@ -20,7 +21,7 @@ const useGetOtherUser = () => {
       }
     };
     fetchOtherUser();
-  }, [dispatch]);
+  }, [dispatch,apiurl]);
 };
 
 export default useGetOtherUser;

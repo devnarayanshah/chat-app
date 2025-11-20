@@ -29,13 +29,14 @@ const router = createBrowserRouter([
 ]);
 function App() {
   const dispatch = useDispatch();
+  const apiurl = import.meta.env.VITE_API_URL;
 
   const { authUser } = useSelector((store) => store.user);
   const { Socket } = useSelector((store) => store.socket);
 
   useEffect(() => {
     if (authUser) {
-      const socketIo = io("https://chat-app-3eav.onrender.com", {
+      const socketIo = io(`${apiurl}`, {
         query: {
           userId: authUser._id,
         },

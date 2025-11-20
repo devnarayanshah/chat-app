@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/userSlice";
 
 const LogIn = () => {
+  const apiurl = import.meta.env.VITE_API_URL;
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -41,16 +43,12 @@ const LogIn = () => {
         passwordError: "",
       });
 
-      const res = await axios.post(
-        "https://chat-app-3eav.onrender.com/api/v1/user/login",
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${apiurl}/api/v1/user/login`, user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         toast.success("you are successfully login");
@@ -76,9 +74,7 @@ const LogIn = () => {
         <h1 className="text-3xl text-black font-bold mb-2">
           Hello, Welcome Back
         </h1>
-        <p className="text-gray-500 mb-6">
-          Hey, welcome back to your nepchat
-        </p>
+        <p className="text-gray-500 mb-6">Hey, welcome back to your nepchat</p>
 
         <form onSubmit={onsubmit} className="space-y-4">
           <div>
