@@ -13,12 +13,11 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
-app.use(cors({
-  origin: "*",
-  methods: ["GET","POST"],
-}));
-
+const corsOptions = {
+  origin: "*", // Allow only requests from this origin
+  credentials: true,
+  methods: ["GET","POST"], // Allow credentials (cookies, HTTP authentication)
+};
 
 app.use(cors(corsOptions));
 app.use("/api/v1/user", userRouts);
