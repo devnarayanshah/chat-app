@@ -22,7 +22,7 @@ const Signup = () => {
     //
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/user/register",
+        "https://chat-app-3eav.onrender.com/api/v1/user/register",
         user,
         {
           headers: {

@@ -10,7 +10,7 @@ const useGetMessage = () => {
         const fetchMessage = async () => {
             try {
                 axios.defaults.withCredentials = true
-                const res = await axios.get(`http://localhost:8080/api/v1/message/${selectedUser?._id}`)
+                const res = await axios.get(`https://chat-app-3eav.onrender.com/api/v1/message/${selectedUser?._id}`)
 
                 dispatch(setMessages(res.data))
                
