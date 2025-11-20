@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ['https://chat-app-3eav.onrender.com'],
+        origin: ['https://nepchat.onrender.com'],
         methods: ['GET', 'POST']
     },
 });
