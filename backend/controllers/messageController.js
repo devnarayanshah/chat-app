@@ -53,7 +53,7 @@ export const sendMessage = async (req, res) => {
 // ==================== Get Messages ====================
 export const getMessage = async (req, res) => {
   try {
-    const receiverId = req.params._id;
+    const receiverId = req.params;
     const senderId = req.id;
 
     const conversation = await Conversation.findOne({
