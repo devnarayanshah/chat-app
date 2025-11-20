@@ -7,7 +7,7 @@ const Message = ({message}) => {
   const {authUser,selectedUser}=useSelector(store=>store.user)
 useEffect(()=>{
   scroll.current?.scrollIntoView({behavior:"smooth"})
-},[message])
+},[message?.message])
   
   return (
    
