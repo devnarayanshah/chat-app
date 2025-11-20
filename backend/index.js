@@ -14,9 +14,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
-  origin: "*", // Allow only requests from this origin
-  credentials: true,
-  methods: ["GET", "POST"], // Allow credentials (cookies, HTTP authentication)
+  origin: "https://nepchat.onrender.com", // Allow only requests from this origin
+  credentials: true, // Allow credentials (cookies, HTTP authentication)
 };
 
 app.use(cors(corsOptions));
